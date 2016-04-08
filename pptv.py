@@ -14,7 +14,10 @@ class Login(unittest.TestCase):
     def test_login(self):
         driver = self.driver
         driver.get(self.base_url)
+        
         pptv_login.login(self)
+        pptv_login.login_fail_null(self)
+
     def tearDown(self):
         self.driver.quit()
         self.assertEqual([],self.verificationErrors)
