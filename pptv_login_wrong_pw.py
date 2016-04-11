@@ -5,12 +5,12 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 
-#正常登录
-def login(self):
+#输入错误的用户名
+def login_wrong_pw(self):
     driver = self.driver
     driver.maximize_window()
     user_name = "wqqtest001pptv"
-    pass_word = "bangbus"
+    pass_word = "bangbus1234"
     try:
         driver.find_element_by_link_text("登录").click()
         driver.switch_to_frame("iframe")
@@ -20,20 +20,12 @@ def login(self):
         driver.find_element_by_xpath(".//*[@id='loginform']/ul/li[2]/input").send_keys(pass_word)
         driver.find_element_by_xpath(".//*[@id='loginform']/ul/li[5]/input").click()
         time.sleep(5)
-        '''
+        
         text = driver.find_element_by_class_name("username").text
         if text.strip() == '':
-            print("login fail!")
+            print("登录失败！登录账号：%s" % text)
         else:
-            print("login success!")
-    '''
+            print("登录成功！登录账号：%s" % text)
+
     except NoSuchElementException as e:
         print("NoSuchElementException",e)
-'''
-    #退出登录
-    finally:
-        above = driver.find_element_by_xpath(".//*[@id='login-area']/div[2]/dl/dd[1]")
-        ActionChains(driver).move_to_element(above).perform()
-        driver.find_element_by_xpath(".//*[@id='btn-user-logout']").click()     
-'''
-
