@@ -536,7 +536,7 @@ class _TestResult(TestResult):
     def startTest(self, test):
         TestResult.startTest(self, test)
         # just one buffer for both stdout and stderr
-        self.outputBuffer = io.BytesIO()
+        self.outputBuffer= io.StringIO()
         stdout_redirector.fp = self.outputBuffer
         stderr_redirector.fp = self.outputBuffer
         self.stdout0 = sys.stdout
@@ -628,7 +628,7 @@ class HTMLTestRunner(Template_mixin):
         test(result)
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
-        print (sys.stderr, '\nTime Elapsed: %s' % (self.stopTime-self.startTime))
+        print(sys.stderr,'\nTime Elapsed: %s' % (self.stopTime-self.startTime))
         return result
 
 
@@ -684,7 +684,8 @@ class HTMLTestRunner(Template_mixin):
             report = report,
             ending = ending,
         )
-        self.stream.write(output.encode('utf-8'))
+        self.stream.write(output.encode('utf8'))
+
 
     def _generate_stylesheet(self):
         return self.STYLESHEET_TMPL
@@ -762,19 +763,20 @@ class HTMLTestRunner(Template_mixin):
         if isinstance(o,str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # uo = unicode(o.encode('string_escape'))
-            uo = o.decode('latin-1')
+            uo = o
         else:
             uo = o
         if isinstance(e,str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # ue = unicode(e.encode('string_escape'))
+            #ue = e.decode('latin-1')
             ue = e
         else:
             ue = e
 
         script = self.REPORT_TEST_OUTPUT_TMPL % dict(
             id = tid,
-            output = saxutils.escape(str(uo)+ue),
+            output = saxutils.escape(uo+ue),
         )
 
         row = tmpl % dict(

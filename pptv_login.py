@@ -20,13 +20,13 @@ def login(self):
         driver.find_element_by_xpath(".//*[@id='loginform']/ul/li[2]/input").send_keys(pass_word)
         driver.find_element_by_xpath(".//*[@id='loginform']/ul/li[5]/input").click()
         time.sleep(5)
-        '''
+        
         text = driver.find_element_by_class_name("username").text
         if text.strip() == '':
             print("login fail!")
         else:
-            print("login success!")
-    '''
+            print("login success!login username is : %s" % text)
+    
     except NoSuchElementException as e:
         print("NoSuchElementException",e)
 '''

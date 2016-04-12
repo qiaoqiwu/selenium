@@ -19,12 +19,12 @@ def login_null(self):
         text_pass = driver.find_element_by_class_name("list-pass").find_element_by_class_name("tip").text
 
         if text_usr.strip() == '':
-            print("用户名输入为空，没有提示")
+            print("用户名输入错误，没有提示")
         else:
-            print("用户名输入为空，提示：%s" % text_usr)
+            print("用户名输入错误，提示：%s" % text_usr)
         if text_pass.strip() == '':
-            print("密码输入为空，没有提示")
+            print("密码输入错误，没有提示")
         else:
-            print("密码输入为空，提示：%s" % text_pass)
+            print("密码输入错误，提示：%s" % text_pass)
     except NoSuchElementException as e:
         print("NoSuchElementException",e)

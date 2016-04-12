@@ -5,6 +5,8 @@ from selenium import webdriver
 import unittest
 import pptv_login,pptv_login_null,pptv_login_wrong_pw,pptv_login_wrong_un
 import HTMLTestRunner
+import time
+import send_report
 
 class Login(unittest.TestCase):
     def setUp(self):
@@ -38,11 +40,12 @@ if __name__ == '__main__':
     testunit = unittest.TestSuite()
 
     testunit.addTest(Login("test_login"))
-    #testunit.addTest(Login("test_login_null"))
-    #testunit.addTest(Login("test_login_wrong_un"))
-    #testunit.addTest(Login("test_login_wrong_pw"))
+    testunit.addTest(Login("test_login_null"))
+    testunit.addTest(Login("test_login_wrong_un"))
+    testunit.addTest(Login("test_login_wrong_pw"))
 
-    filename = 'D:\\wqq\\python\\selenium\\result.html'
+    now = time.strftime("%Y-%m-%d-%H_%M_%S",time.localtime(time.time()))
+    filename = "D:\\" + now + "-" + "result.html"
     fp = open(filename,'wb')
 
     runner = HTMLTestRunner.HTMLTestRunner(
@@ -52,3 +55,4 @@ if __name__ == '__main__':
         )
     runner.run(testunit)
     fp.close()
+    send_report.sendreport()
