@@ -7,6 +7,7 @@ import time
 
 #正常登录
 def login(self):
+    u"""PPTV普通登录"""
     driver = self.driver
     driver.maximize_window()
     user_name = "wqqtest001pptv"
@@ -21,11 +22,17 @@ def login(self):
         driver.find_element_by_xpath(".//*[@id='loginform']/ul/li[5]/input").click()
         time.sleep(5)
         
-        text = driver.find_element_by_class_name("username").text
-        if text.strip() == '':
-            print("login fail!")
+        #text = driver.find_element_by_class_name("username").text
+        try:
+            text = driver.find_element_by_class_name("username").text
+            a = True
+        except:
+            a = False
+            
+        if a == True:
+            print("登录成功!  登录用户名为 : %s" % text)
         else:
-            print("login success!login username is : %s" % text)
+            print("登录失败!")
     
     except NoSuchElementException as e:
         print("NoSuchElementException",e)

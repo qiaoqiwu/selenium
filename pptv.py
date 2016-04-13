@@ -6,7 +6,7 @@ import unittest
 import pptv_login,pptv_login_null,pptv_login_wrong_pw,pptv_login_wrong_un
 import HTMLTestRunner
 import time
-import send_report
+import send_report,pptv_login_by_qq,pptv_login_by_ap,pptv_login_by_wb
 
 class Login(unittest.TestCase):
     def setUp(self):
@@ -30,6 +30,18 @@ class Login(unittest.TestCase):
         driver = self.driver
         driver.get(self.base_url)
         pptv_login_wrong_pw.login_wrong_pw(self)
+    def test_login_by_qq(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        pptv_login_by_qq.login_by_qq(self)
+    def test_login_by_ap(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        pptv_login_by_ap.login_by_ap(self)
+    def test_login_by_wb(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        pptv_login_by_wb.login_by_wb(self)
 
     def tearDown(self):
         self.driver.quit()
@@ -43,7 +55,10 @@ if __name__ == '__main__':
     testunit.addTest(Login("test_login_null"))
     testunit.addTest(Login("test_login_wrong_un"))
     testunit.addTest(Login("test_login_wrong_pw"))
-
+    testunit.addTest(Login("test_login_by_qq"))
+    testunit.addTest(Login("test_login_by_ap"))
+    testunit.addTest(Login("test_login_by_wb"))
+    
     now = time.strftime("%Y-%m-%d-%H_%M_%S",time.localtime(time.time()))
     filename = "D:\\" + now + "-" + "result.html"
     fp = open(filename,'wb')

@@ -1,22 +1,21 @@
-# coding = utf-8
 from selenium import webdriver
+import unittest
 import time
+import pptv_login_by_ap
 
-browser = webdriver.Chrome()
-browser.get("http://www.pptv.com")
-browser.maximize_window()
+class Login(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+        self.base_url = "http://www.pptv.com"
+        self.accept_next_alert = True
+        self.verificationErrors = []
+    def test_login_wrong_pw(self):
+        driver = self.driver
+        driver.get(self.base_url)
+        pptv_login_by_ap.login_by_ap(self)
+    def tearDown(self):
+        self.driver.quit()
+        self.assertEqual([],self.verificationErrors)
 
-browser.find_element_by_link_text("登录").click()
-time.sleep(3)
-
-browser.switch_to_frame("iframe")
-
-browser.find_element_by_xpath("//*[@id='loginform']/ul/li[1]/input").clear()
-browser.find_element_by_xpath("//*[@id='loginform']/ul/li[1]/input").send_keys("wqqtest001pptv")
-browser.find_element_by_xpath("//*[@id='loginform']/ul/li[2]/input").clear()
-browser.find_element_by_xpath("//*[@id='loginform']/ul/li[2]/input").send_keys("bangbus")
-browser.find_element_by_xpath("//*[@id='loginform']/ul/li[5]/input").click()
-#browser.find_element_by_xpath("//*[@id='loginform']/ul/li[5]/input").submit()
-
-time.sleep(5)
-browser.quit()
+if __name__ == '__main__':
+    unittest.main()
