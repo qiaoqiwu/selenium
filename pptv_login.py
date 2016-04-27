@@ -10,8 +10,8 @@ def login(self):
     u"""PPTV普通登录"""
     driver = self.driver
     driver.maximize_window()
-    user_name = "wqqtest001pptv"
-    pass_word = "bangbus"
+    user_name = ""
+    pass_word = ""
     try:
         driver.find_element_by_link_text("登录").click()
         driver.switch_to_frame("iframe")

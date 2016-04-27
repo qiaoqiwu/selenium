@@ -9,7 +9,7 @@ from email.header import Header
 import os,time,datetime
 
 def sentmail(file_new):
-    mail_from = 'wqqtest001@163.com'
+    mail_from = ''
     mail_to = 'qiaoqiwu@pptv.com'
     subject = u"PPTV首页自动化测试报告"
 
@@ -34,7 +34,7 @@ def sentmail(file_new):
     
     smtp = smtplib.SMTP()
     smtp.connect('smtp.163.com')
-    smtp.login('wqqtest001@163.com','bangbus')
+    smtp.login('','')
     smtp.sendmail(mail_from,mail_to,msg.as_string())
     smtp.quit()
 
